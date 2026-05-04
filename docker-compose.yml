@@ -1,0 +1,15 @@
+services:
+
+  api:
+    build: .
+    expose:
+      - "8000"        # solo visible internamente, nginx lo llama por nombre "api"
+    restart: unless-stopped
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"       # único puerto abierto al exterior
+    depends_on:
+      - api
+    restart: unless-stopped
