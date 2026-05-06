@@ -9,7 +9,10 @@ services:
   nginx:
     build: ./nginx
     ports:
-      - "80:80"       # único puerto abierto al exterior
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro   # monta los certs del host (read-only)
     depends_on:
       - api
     restart: unless-stopped
